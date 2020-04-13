@@ -11,11 +11,6 @@ import java.util.Set;
 public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
 
     @Override
-    public Owner save(Owner object) {
-        return super.save(object.getId(), object);
-    }
-
-    @Override
     public Owner findByLastName(String lastName) {
         Set<Map.Entry<Long, Owner>> entities = this.map.entrySet();
 
