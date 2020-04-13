@@ -1,7 +1,7 @@
 package com.example.petclinic.services.map;
 
-import javax.persistence.Id;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,7 +10,7 @@ public abstract class AbstractMapService<T, ID> {
     protected Map<ID, T> map = new HashMap<ID, T>();
 
     public Set<T> findAll() {
-        return (Set<T>) map.values();
+        return new HashSet<T>(map.values());
     }
 
     public T findById(ID id) {
