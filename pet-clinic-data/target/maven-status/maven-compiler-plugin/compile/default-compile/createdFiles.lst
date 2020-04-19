@@ -1,5 +1,14 @@
-com\example\petclinic\model\Pet.class
 com\example\petclinic\model\Vet.class
-com\example\petclinic\model\Person.class
 com\example\petclinic\model\Owner.class
+com\example\petclinic\services\VetService.class
 com\example\petclinic\model\PetType.class
+com\example\petclinic\model\Pet.class
+com\example\petclinic\services\CrudService.class
+com\example\petclinic\services\map\OwnerServiceMap.class
+com\example\petclinic\model\BaseEntity.class
+com\example\petclinic\services\map\VetServiceMap.class
+com\example\petclinic\services\PetService.class
+com\example\petclinic\services\map\AbstractMapService.class
+com\example\petclinic\services\map\PetServiceMap.class
+com\example\petclinic\services\OwnerService.class
+com\example\petclinic\model\Person.class
