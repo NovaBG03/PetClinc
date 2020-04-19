@@ -1,5 +1,0 @@
-com\example\petclinic\PetClinicApplication.class
-com\example\petclinic\bootstrap\DataLoader.class
-com\example\petclinic\controllers\VetController.class
-com\example\petclinic\controllers\OwnerController.class
-com\example\petclinic\controllers\IndexController.class
