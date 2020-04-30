@@ -28,14 +28,14 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Integer count = petTypeService.findAll().size();
+        int count = petTypeService.findAll().size();
 
         if (count == 0) {
-            LoadData();
+            loadData();
         }
     }
 
-    private void LoadData() {
+    private void loadData() {
         PetType dog = new PetType();
         dog.setName("Dog");
         PetType savedDogPetType = petTypeService.save(dog);
@@ -61,7 +61,6 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Loaded Specialties");
 
         Owner owner1 = new Owner();
-        owner1.setId(1L);
         owner1.setFirstName("Michael");
         owner1.setLastName("Weston");
         owner1.setAddress("123 Brickerel");
@@ -78,7 +77,6 @@ public class DataLoader implements CommandLineRunner {
         ownerService.save(owner1);
 
         Owner owner2 = new Owner();
-        owner2.setId(2L);
         owner2.setFirstName("Fiona");
         owner2.setLastName("Glenanne");
         owner2.setAddress("123 Brickerel");
@@ -86,7 +84,7 @@ public class DataLoader implements CommandLineRunner {
         owner2.setTelephone("1231231234");
 
         Pet fionasCat = new Pet();
-        fionasCat.setName("Just cat");
+        fionasCat.setName("Just Cat");
         fionasCat.setPetType(savedCatPetType);
         fionasCat.setBirthDate(LocalDate.now());
         fionasCat.setOwner(owner2);
@@ -103,7 +101,6 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Loaded Owners...");
 
         Vet vet1 = new Vet();
-        vet1.setId(1L);
         vet1.setFirstName("Sam");
         vet1.setLastName("Axe");
         vet1.getSpecialities().add(savedRadiology);
@@ -111,7 +108,6 @@ public class DataLoader implements CommandLineRunner {
         vetService.save(vet1);
 
         Vet vet2 = new Vet();
-        vet2.setId(2L);
         vet2.setFirstName("Jessie");
         vet2.setLastName("Porter");
         vet2.getSpecialities().add(savedSurgery);
