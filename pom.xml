@@ -11,7 +11,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>pet-clinic</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
 
     <name>pet-clinic</name>
     <description>Spring 5 project</description>
@@ -49,7 +49,7 @@
 
     <scm>
         <developerConnection>scm:git:git@github.com:NovaBG03/pet-clinic.git</developerConnection>
-        <tag>0.1.0</tag>
+        <tag>HEAD</tag>
     </scm>
 
 </project>
