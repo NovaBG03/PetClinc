@@ -12,21 +12,21 @@ class OwnerMapServiceTest {
 
     OwnerMapService ownerMapService;
 
-    final Long ownerId = 1L;
-    final String lastName = "Georgiev";
+    static final Long OWNER_ID = 1L;
+    static final String LAST_NAME = "Georgiev";
 
     @BeforeEach
     void setUp() {
         ownerMapService = new OwnerMapService(new PetMapService(), new PetTypeMapService());
 
-        ownerMapService.save(Owner.builder().id(ownerId).lastName(lastName).build());
+        ownerMapService.save(Owner.builder().id(OWNER_ID).lastName(LAST_NAME).build());
     }
 
     @Test
     void findByLastName() {
-        Owner owner = ownerMapService.findByLastName(lastName);
+        Owner owner = ownerMapService.findByLastName(LAST_NAME);
 
-        assertEquals(ownerId, owner.getId());
+        assertEquals(OWNER_ID, owner.getId());
     }
 
     @Test
@@ -50,9 +50,9 @@ class OwnerMapServiceTest {
 
     @Test
     void findById() {
-        Owner owner = ownerMapService.findById(ownerId);
+        Owner owner = ownerMapService.findById(OWNER_ID);
 
-        assertEquals(ownerId, owner.getId());
+        assertEquals(OWNER_ID, owner.getId());
     }
 
     @Test
@@ -64,7 +64,7 @@ class OwnerMapServiceTest {
 
     @Test
     void deleteById() {
-        ownerMapService.deleteById(ownerId);
+        ownerMapService.deleteById(OWNER_ID);
 
         Set<Owner> owners = ownerMapService.findAll();
 
@@ -73,7 +73,7 @@ class OwnerMapServiceTest {
 
     @Test
     void delete() {
-        ownerMapService.delete(ownerMapService.findById(ownerId));
+        ownerMapService.delete(ownerMapService.findById(OWNER_ID));
 
         Set<Owner> owners = ownerMapService.findAll();
 
