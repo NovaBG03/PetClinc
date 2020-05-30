@@ -28,10 +28,11 @@ class OwnerSDJpaServiceTest {
     Owner returnOwner;
 
     static final Long OWNER_ID = 1L;
+    static final String LAST_NAME = "Georgiev";
 
     @BeforeEach
     void setUp() {
-        returnOwner = Owner.builder().id(OWNER_ID).build();
+        returnOwner = Owner.builder().id(OWNER_ID).lastName(LAST_NAME).build();
     }
 
     @Test
@@ -104,5 +105,20 @@ class OwnerSDJpaServiceTest {
         service.deleteById(1L);
 
         Mockito.verify(ownerRepository).deleteById(Mockito.anyLong());
+    }
+
+    @Test
+    void testFindAllByLastNameLike() {
+        String partOfLastName = "giev";
+        Set<Owner> returnSet = new HashSet<>();
+        returnSet.add(returnOwner);
+
+        Mockito.when(ownerRepository.findAllByLastNameLike(partOfLastName)).thenReturn(returnSet);
+
+        Set<Owner> owners = service.findAllByLastNameLike(partOfLastName);
+
+        Owner owner = owners.stream().findFirst().get();
+        assertEquals(LAST_NAME, owner.getLastName());
+        Mockito.verify(ownerRepository, Mockito.times(1)).findAllByLastNameLike(partOfLastName);
     }
 }

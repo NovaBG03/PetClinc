@@ -79,4 +79,14 @@ class OwnerMapServiceTest {
 
         assertEquals(0, owners.size());
     }
+
+    @Test
+    void testFindAllByLastNameLike() {
+        String partOfLastName = "%giev%";
+
+        Set<Owner> owners = ownerMapService.findAllByLastNameLike(partOfLastName);
+
+        Owner owner = owners.stream().findFirst().get();
+        assertEquals(LAST_NAME, owner.getLastName());
+    }
 }

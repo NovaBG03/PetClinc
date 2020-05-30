@@ -25,6 +25,11 @@ public class OwnerSDJpaService implements OwnerService {
     }
 
     @Override
+    public Set<Owner> findAllByLastNameLike(String lastName) {
+        return this.ownerRepository.findAllByLastNameLike(lastName);
+    }
+
+    @Override
     public Owner findById(Long aLong) {
         return ownerRepository.findById(aLong).orElse(null);
     }
