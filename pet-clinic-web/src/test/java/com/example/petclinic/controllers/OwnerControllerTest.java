@@ -70,6 +70,17 @@ class OwnerControllerTest {
     }
 
     @Test
+    void testProcessFindFormZero() throws Exception {
+        Set<Owner> returnSet = new HashSet<>();
+
+        when(ownerService.findAllByLastNameLike(anyString())).thenReturn(returnSet);
+
+        mockMvc.perform(get("/owners"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/owners/findOwners"));
+    }
+
+    @Test
     void testProcessFindFormOne() throws Exception {
         Long id = 1L;
         String lastName = "lastName";
