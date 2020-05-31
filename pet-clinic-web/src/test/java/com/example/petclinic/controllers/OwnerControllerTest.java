@@ -114,4 +114,56 @@ class OwnerControllerTest {
                 .andExpect(view().name("/owners/ownersList"))
                 .andExpect(model().attribute("selections", hasSize(2)));
     }
+
+    @Test
+    void testInitCreationForm() throws Exception {
+
+        mockMvc.perform(get("/owners/new"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/owners/createOrUpdateOwnerForm"))
+                .andExpect(model().attributeExists("owner"));
+    }
+
+    @Test
+    void testProcessCreationForm() throws Exception {
+        Long id = 1L;
+        Owner owner = Owner.builder().id(id).build();
+
+        when(ownerService.save(any())).thenReturn(owner);
+
+        mockMvc.perform(post("/owners/new"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/" + id));
+
+        verify(ownerService, times(1)).save(any());
+    }
+
+    @Test
+    void testInitUpdateForm() throws Exception {
+        Long id = 1L;
+        Owner owner = Owner.builder().id(id).build();
+
+        when(ownerService.findById(id)).thenReturn(owner);
+
+        mockMvc.perform(get("/owners/" + id + "/edit"))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/owners/createOrUpdateOwnerForm"))
+                .andExpect(model().attributeExists("owner"));
+
+        verify(ownerService, times(1)).findById(id);
+    }
+
+    @Test
+    void testProcessUpdateForm() throws Exception {
+        Long id = 1L;
+        Owner owner = Owner.builder().id(id).build();
+
+        when(ownerService.save(any())).thenReturn(owner);
+
+        mockMvc.perform(post("/owners/" + id + "/edit"))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(view().name("redirect:/owners/" + id));
+
+        verify(ownerService, times(1)).save(any());
+    }
 }
