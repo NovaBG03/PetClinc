@@ -57,9 +57,9 @@ public class PetController {
 
     @PostMapping("/pets/new")
     public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult bindingResult, Model model) {
-        if (StringUtils.hasLength(pet.getName())
-                && pet.isNew()
-                && (owner.getPet(pet.getName(), true) != null)) {
+        pet.setOwner(owner);
+
+        if (StringUtils.hasLength(pet.getName()) && pet.isNew() && owner.getPet(pet.getName(), true) != null) {
             bindingResult.rejectValue("name", "duplicate", "already exists");
         }
 
@@ -68,7 +68,6 @@ public class PetController {
             return PETS_CREATE_OR_UPDATE_PET_FORM;
         }
 
-        pet.setOwner(owner);
         petService.save(pet);
 
         return "redirect:/owners/" + owner.getId();
@@ -84,13 +83,15 @@ public class PetController {
 
     @PostMapping("/pets/{petId}/edit")
     public String processUpdateForm(Owner owner, @Valid Pet pet, BindingResult bindingResult, Model model) {
+        pet.setOwner(owner);
+
+        //todo validate whether pet with updated pet's name exists
+
         if (bindingResult.hasErrors()) {
-            //pet.setOwner(owner);
             model.addAttribute("pet", pet);
             return PETS_CREATE_OR_UPDATE_PET_FORM;
         }
 
-        pet.setOwner(owner);
         petService.save(pet);
 
         return "redirect:/owners/" + owner.getId();
