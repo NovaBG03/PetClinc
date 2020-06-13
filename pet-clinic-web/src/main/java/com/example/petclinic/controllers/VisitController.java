@@ -4,6 +4,7 @@ import com.example.petclinic.model.Pet;
 import com.example.petclinic.model.Visit;
 import com.example.petclinic.services.PetService;
 import com.example.petclinic.services.VisitService;
+import org.apache.tomcat.jni.Local;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.beans.PropertyEditorSupport;
+import java.time.LocalDate;
 
 @RequestMapping("/owners/{ownerId}/pets/{petId}/visits")
 @Controller
@@ -27,6 +30,13 @@ public class VisitController {
     @InitBinder
     public void initBinder(WebDataBinder webDataBinder) {
         webDataBinder.setDisallowedFields("id");
+
+        webDataBinder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                setValue(LocalDate.parse(text));
+            }
+        });
     }
 
     @ModelAttribute("visit")
